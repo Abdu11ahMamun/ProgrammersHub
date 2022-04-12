@@ -9,3 +9,9 @@
 
 <div class="contentsection contemplete clear">
 <div class="maincontent clear">
+<?php
+    $query= "SELECT * FROM tbl_post where title LIKE '%$search%' OR body LIKE '%$search%'";
+    $post=$db->select($query);
+    if($post){
+        while($result=$post->fetch_assoc()){
+    ?>
