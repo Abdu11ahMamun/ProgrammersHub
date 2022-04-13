@@ -18,6 +18,16 @@ Session::init(); //access in the session
 <body>
 <div class="container">
 	<section id="content">
+    <?php
+		   if($_SERVER['REQUEST_METHOD'] =='POST'){
+			$username=$fm->validation($_POST['username']);
+			$password=$fm->validation(md5($_POST['password']));
+
+			$username=mysqli_real_escape_string($db->link,$username);
+			$password=mysqli_real_escape_string($db->link,$password);
+
+		   }
+		?>
 		<form action="login.php" method="post">
 			<h1>Admin Login</h1>
 			<div>
