@@ -26,7 +26,25 @@ Session::init(); //access in the session
 			$username=mysqli_real_escape_string($db->link,$username);
 			$password=mysqli_real_escape_string($db->link,$password);
 
-		   }
+      $query="SELECT * FROM tbl_user WHERE username='$username' AND password='$password'";
+			$result=$db->select($query);
+			if($result!=false){
+				$value=mysqli_fetch_array($result);
+				$row=mysqli_num_rows($result);
+				if($row>0){
+					Session::set("login",true);
+					Session::set("username",$value['username']);
+					Session::set("userId",$value['id']);
+					header("Location:index.php");
+
+				}else{
+					echo "<span style='color:red;font-size:15px;'> No result found.</span>";
+				}
+			}else{
+				echo "<span style='color:red;font-size:15px;'> Name or password not matched.</span>";
+			}
+
+	  }
 		?>
 		<form action="login.php" method="post">
 			<h1>Admin Login</h1>
