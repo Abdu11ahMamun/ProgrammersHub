@@ -19,7 +19,17 @@
 </tr>
 </thead>
 <tbody>
-
+<?php 
+$query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post
+			INNER JOIN tbl_category
+			ON tbl_post.cat = tbl_category.id 
+			ORDER By tbl_post.title DESC";
+			$post = $db->select($query);
+			if ($post) {
+			$i=0;
+			while ($result = $post->fetch_assoc()) {
+			$i++;
+?>
 <tr class="odd gradeX">
 <td><?php echo $i; ?></td>
 <td><?php echo $result['title']; ?></td>
