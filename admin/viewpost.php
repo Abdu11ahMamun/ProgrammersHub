@@ -1,6 +1,19 @@
 <?php include 'inc/header.php'; ?> 
 <?php include 'inc/sidebar.php'; ?> 
+<?php
+if (!isset($_GET['viewpostid'])|| $_GET['viewpostid'] == NULL) {
+    echo "<script>window.location = 'postlist.php';</script>"; 
+}else {
+    $postid = $_GET['viewpostid'];
+}?>
+<div class="grid_10"> <div class="box round first grid">
+<h2>Update Post</h2>
+<?php
+ if ($_SERVER['REQUEST_METHOD']=='POST'){
+    echo "<script>window.location = 'postlist.php';</script>"; 
 
+}
+?>
         <div class="block"> 
             <?php $query = "select * from tbl_post where id='$postid' order by id desc";
              $getpost= $db->select($query);
@@ -25,7 +38,13 @@
                     <td>
                         <select id="select" readonly>
                             <option >Select Category</option>
-                         
+                            <?php 
+                                $query= "SELECT * from tbl_category";
+                                $category= $db->select($query);
+                                if($category){
+                                    while($result= $category->fetch_assoc()){
+
+                            ?>
                             <option 
                             <?php
                                 if($postresult['cat']==$result['id']){ ?>
@@ -34,7 +53,7 @@
                             ?>
                             
                             value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
-                   
+                            <? }} ?>
                         </select>
                     </td>
                 </tr>
@@ -91,6 +110,15 @@
         </div>
     </div>
 </div>
-
+ <!-- Load TinyMCE-->
+ <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+    });
+  </script>
 
 <?php include 'inc/footer.php';?>
