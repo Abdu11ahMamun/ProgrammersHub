@@ -1,7 +1,11 @@
 <?php include'inc/header.php';?>
 <?php
 //Getting id
- 
+ if (!isset($_GET['id']) || $_GET['id'] ==NULL){
+	 header("Location: 404.php");
+ }else{
+	 $id = $_GET['id'];
+ }
 ?>
 <div class="contentsection contemplete clear">
 <div class="maincontent clear">
@@ -20,7 +24,14 @@
 	
 	<div class="relatedpost clear">
 		<h2>Related articles</h2>
-		
+		<?php
+			$catid= $result['cat'];
+			$queryrelated = "SELECT * FROM tbl_post where cat= '$catid' order by rand() limit 6";
+			$relatedpost=$db->select($queryrelated);
+			if($relatedpost){
+				while($rresult=$relatedpost->fetch_assoc()){
+
+		?>
 		<a href="post.php?id=<?php echo $rresult['id'];?>">
 			<img src="admin/<?php echo $rresult['image'];?>">
 		</a>
@@ -29,7 +40,7 @@
 		}?>
 	</div>
 
-	<?php  else{
+	<?php  } } else{
 			header('Location:404.php');
 		}
 	?>
