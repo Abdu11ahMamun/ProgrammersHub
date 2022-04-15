@@ -20,7 +20,7 @@
 	<div class="headersection templete clear">
 		<a href="index.php">
 			<div class="logo">
-				<img src="images/pro_logo.png" alt="Logo"/>
+				<img src="images/logo.png" alt="Logo"/>
 				<h2>Programming Hub</h2>
 			</div>
 		</a>
