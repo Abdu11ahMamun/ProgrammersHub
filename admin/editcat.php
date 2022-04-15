@@ -21,7 +21,7 @@ else
                    $name=mysqli_real_escape_string($db->link,$name);
                    if (empty($name))
                    {
-                       echo "<span class='error'>Field must not be empty! </span>";
+                       echo "<span class='error'>Field Must Not Be Empty! </span>";
                    }
                    else
                    {
@@ -67,5 +67,4 @@ else
             </div>
         </div>
     </div>
-
-<?php include 'inc/footer.php';?>
+    <?php include 'inc/footer.php';?>
