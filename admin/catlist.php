@@ -1,10 +1,26 @@
 <?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<div class="grid_10">
+
+        <div class="grid_10">
             <div class="box round first grid">
                 <h2>Category List</h2>
                 
-              
+                <?php
+                //Category Delete
+                if (isset($_GET['delcat'])){
+                    $delid= $_GET['delcat'];
+                    $delquey = "delete from tbl_category where id='$delid' ";
+                    $deldata = $db->delete($delquey);
+                    if( $deldata )
+                         {
+                            echo "<span class='success'>Catergory Deleted Successfully </span>";
+                         }
+                         else
+                         {
+                            echo "<span class='error'>Catergory Not Deleted  ! </span>";
+                         }
+                }
+                ?>
 
                 <div class="block">        
                     <table class="data display datatable" id="example">
@@ -46,5 +62,5 @@
             setSidebarHeight();
         });
         </script>
-
 <?php include 'inc/footer.php';?>
+    
