@@ -6,7 +6,7 @@
                 <h2>User List</h2>
 
                 <?php
-
+// delete users
                 if (isset($_GET['deluser'])){
                     $deluser= $_GET['deluser'];
                     $delquey = "delete from tbl_user where id='$deluser' ";
@@ -23,6 +23,7 @@
                 ?>
 
                 <div class="block">
+                  <!-- table is cretaed to view the users -->
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
