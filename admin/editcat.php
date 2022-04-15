@@ -16,7 +16,33 @@ else
         <div class="box round first grid">
             <h2>Update Category</h2>
            <div class="block copyblock"> 
-              
+               <?php
+               if ($_SERVER['REQUEST_METHOD']=='POST'){
+                   $name = $_POST['name'];
+                   $name=mysqli_real_escape_string($db->link,$name);
+                   if (empty($name))
+                   {
+                       echo "<span class='error'>Field must not be empty! </span>";
+                   }
+                   else
+                   {
+                    // update category name
+                     $query = " UPDATE tbl_category
+                     SET name = '$name'
+                     WHERE id = '$id' ";  
+                     $updated_row = $db->update($query);
+                     if($updated_row)
+                     {
+                        echo "<span class='success'>Catergory Updated Successfully </span>";
+                     }
+                     else
+                     {
+                        echo "<span class='error'>Catergory Not Updated !</span>";
+                     }
+
+                   }
+               }
+              ?>
                <?php
                //fetch the category
                $query = "select * from tbl_category where id=$id order by id desc"; 
