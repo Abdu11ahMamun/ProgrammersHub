@@ -110,8 +110,8 @@ if (!isset($_GET['viewpostid'])|| $_GET['viewpostid'] == NULL) {
         </div>
     </div>
 </div>
- <!-- Load TinyMCE-->
- <script>
+<!-- Load TinyMCE -->
+<script>
     tinymce.init({
       selector: 'textarea',
       plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
