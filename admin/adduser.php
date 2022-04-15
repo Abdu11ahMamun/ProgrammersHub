@@ -11,7 +11,36 @@
             <div class="box round first grid">
                 <h2>Add New User</h2>
                <div class="block copyblock">
-                  
+                   <?php
+                   if ($_SERVER['REQUEST_METHOD']=='POST'){
+		        	   $username=$fm->validation($_POST['username']);
+		        	   $password=$fm->validation(md5($_POST['password']));
+		        	   $role=$fm->validation($_POST['role']);
+
+
+                       $username=mysqli_real_escape_string($db->link,$username);
+                       $password=mysqli_real_escape_string($db->link,$password);
+                       $role=mysqli_real_escape_string($db->link,$role);
+
+                       if (empty($username)||empty($password)||empty($role))
+                       {
+                           echo "<span class='error'>Field must not be empty! </span>";
+                       }else
+                       {
+                         $query = "INSERT INTO tbl_user(username,password,role)  VALUES ('$username','$password','$role')";
+                         $catinsert = $db->insert($query);
+                         if($catinsert)
+                         {
+                            echo "<span class='success'>User Created Successfully </span>";
+                         }
+                         else
+                         {
+                            echo "<span class='error'>User Not created</span>";
+                         }
+
+                       }
+                   }
+                   ?>
                  <form action="" method="post">
                     <table class="form">
                         <tr>
