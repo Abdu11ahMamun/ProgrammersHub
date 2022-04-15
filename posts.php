@@ -3,7 +3,7 @@
 
 <?php
      if(!isset($_GET['category'])|| $_GET['category']==NULL){
-         header("Location: 404.php");
+         header("Location:404.php");
      }else{
          $id=$_GET['category'];
      }
@@ -14,6 +14,7 @@
 <?php
     $query= "SELECT * FROM tbl_post where cat=$id";
     $post=$db->select($query);
+    
     if($post){
         while($result=$post->fetch_assoc()){
    ?>
