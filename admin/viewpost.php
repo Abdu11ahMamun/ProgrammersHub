@@ -1,11 +1,6 @@
 <?php include 'inc/header.php'; ?> 
 <?php include 'inc/sidebar.php'; ?> 
-<?php
-if (!isset($_GET['viewpostid'])|| $_GET['viewpostid'] == NULL) {
-    echo "<script>window.location = 'postlist.php';</script>"; 
-}else {
-    $postid = $_GET['viewpostid'];
-}?>
+
 <div class="grid_10"> <div class="box round first grid">
 <h2>Update Post</h2>
 <?php
@@ -111,14 +106,6 @@ if (!isset($_GET['viewpostid'])|| $_GET['viewpostid'] == NULL) {
     </div>
 </div>
  <!-- Load TinyMCE-->
- <script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
-      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
-      toolbar_mode: 'floating',
-      tinycomments_mode: 'embedded',
-    });
-  </script>
+
 
 <?php include 'inc/footer.php';?>
