@@ -4,6 +4,8 @@
             <div class="box round first grid">
                 <h2>Category List</h2>
                 
+              
+
                 <div class="block">        
                     <table class="data display datatable" id="example">
 					<thead>
@@ -14,6 +16,11 @@
 						</tr>
 					</thead>
 					<tbody>
+                        <?php
+                        $query = "select * from tbl_category order by id desc";
+                        $category = $db->select($query);
+                        if ($category)
+                         ?>
                        
 					</tbody>
 				</table>
