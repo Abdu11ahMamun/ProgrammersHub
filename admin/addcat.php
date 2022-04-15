@@ -23,7 +23,7 @@
                          }
                          else
                          {
-                            echo "<span class='error'>Catergory Not Inserted Successfully </span>";
+                            echo "<span class='error'>Catergory Is Not Inserted Successfully </span>";
                          }
 
                        }
