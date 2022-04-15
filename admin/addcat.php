@@ -13,7 +13,20 @@
                        {
                            echo "<span class='error'>Field must not be empty! </span>";
                        }
-                       
+                       else
+                       {
+                         $query = "INSERT INTO tbl_category(name)  VALUES ('$name')";  
+                         $catinsert = $db->insert($query);
+                         if($catinsert)
+                         {
+                            echo "<span class='success'>Catergory Inserted Successfully </span>";
+                         }
+                         else
+                         {
+                            echo "<span class='error'>Catergory Not Inserted Successfully </span>";
+                         }
+
+                       }
                    }
                    ?>
                  <form action="" method="post">
