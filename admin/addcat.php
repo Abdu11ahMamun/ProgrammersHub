@@ -5,7 +5,17 @@
             <div class="box round first grid">
                 <h2>Add New Category</h2>
                <div class="block copyblock"> 
-                   
+                   <?php
+                   if ($_SERVER['REQUEST_METHOD']=='POST'){
+                       $name = $_POST['name'];
+                        $name=mysqli_real_escape_string($db->link,$name);
+                       if (empty($name))
+                       {
+                           echo "<span class='error'>Field must not be empty! </span>";
+                       }
+                       
+                   }
+                   ?>
                  <form action="" method="post">
                     <table class="form">					
                         <tr>
@@ -23,19 +33,4 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php include 'inc/footer.php';?>
