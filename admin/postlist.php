@@ -18,6 +18,23 @@
 <th widht="15%">Action</th>
 </tr>
 </thead>
+
+<?php 
+	// Delete post
+	if (isset($_GET['delpostid'])){
+		$delid= $_GET['delpostid'];
+		$delquey = "delete from tbl_post where id='$delid' ";
+		$deldata = $db->delete($delquey);
+		if( $deldata )
+				{
+				echo "<span class='success'>Post Deleted Successfully </span>";
+				}
+				else
+				{
+				echo "<span class='error'>Post Not Deleted  ! </span>";
+				}
+	}
+?>
 <tbody>
 <?php 
 $query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post
