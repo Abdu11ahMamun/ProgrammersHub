@@ -10,11 +10,9 @@ else
 {
     $id = $_GET['catid'];
 }
-
 ?>
  <div class="grid_10">
-		
-        <div class="box round first grid">
+		<div class="box round first grid">
             <h2>Update Category</h2>
            <div class="block copyblock"> 
                <?php
@@ -27,7 +25,7 @@ else
                    }
                    else
                    {
-                    // update category name
+                    // update category name 
                      $query = " UPDATE tbl_category
                      SET name = '$name'
                      WHERE id = '$id' ";  
@@ -44,7 +42,6 @@ else
                    }
                }
                ?>
-               
                <?php
                //fetch the category
                $query = "select * from tbl_category where id=$id order by id desc"; 
