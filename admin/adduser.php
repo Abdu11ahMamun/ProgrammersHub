@@ -41,7 +41,7 @@
                        }
                    }
                    ?>
-                 <form action="" method="post">
+                  <form action="" method="post"><!--form is created -->
                     <table class="form">
                         <tr>
                             <td><label>Username</label></td>
