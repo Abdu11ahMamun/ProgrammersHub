@@ -73,7 +73,7 @@ if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
           where id= '$postid'";
           $updated_row = $db->update($query);
           if ($updated_row) {
-           echo "<span class='success'>Post Updated Successfully. </span>";
+              echo "<span class='error' >Field must not be empty ! </span>";//2
           }else{
            echo "<span class='success'>Post Not Updated. </span>";
           }
@@ -83,7 +83,10 @@ if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
 }
 ?>
         <div class="block"> 
-                     
+            <?php $query = "select * from tbl_post where id='$postid' order by id desc";
+             $getpost= $db->select($query);
+             while($postresult= $getpost->fetch_assoc()){
+            ?>              
         <form action="" method="post" enctype="multipart/form-data">
             <table class="form">
             
@@ -103,10 +106,22 @@ if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
                     <td>
                         <select id="select" name="cat">
                             <option >Select Category</option>
-                        
+                            <?php 
+                                $query= "SELECT * from tbl_category";
+                                $category= $db->select($query);
+                                if($category){
+                                    while($result= $category->fetch_assoc()){
+
+                            ?>
+                            <option 
+                            <?php
+                                if($postresult['cat']==$result['id']){ ?>
+                            selected="selected"
+                            <?php    }
+                            ?>
                             
                             value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
-                   
+                            <?php }} ?> //1
                         </select>
                     </td>
                 </tr>
@@ -145,7 +160,8 @@ if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
                         <label>Author</label>
                     </td>
                     <td>
-                        
+                        <input type="text" name="author" value="<?php echo $postresult['author']; ?>" class="medium" />
+                        <input type="hidden" name="userid" value="<?php echo Session::get('userId')?>" class="medium" />
 
                     </td>
                 </tr>
@@ -158,10 +174,19 @@ if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
                 </tr>
             </table>
             </form>
-            
+            <?php }?>
         </div>
     </div>
 </div>
-<
+<!-- Load TinyMCE -->
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter image editimage pageembed permanentpen table tableofcontents',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+    });
+  </script>
 
 <?php include 'inc/footer.php';?>
