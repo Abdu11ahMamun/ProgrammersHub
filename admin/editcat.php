@@ -1,9 +1,5 @@
 <?php include 'inc/header.php';?>
 <?php include 'inc/sidebar.php';?>
-<<<<<<< HEAD
-
-
-=======
 <?php
 if(!isset($_GET['catid']) || $_GET['catid'] == NULL)
 {
@@ -71,6 +67,6 @@ else
             </div>
         </div>
     </div>
->>>>>>> categorylist
+
 
 <?php include 'inc/footer.php';?>
