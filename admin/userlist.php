@@ -5,6 +5,22 @@
             <div class="box round first grid">
                 <h2>User List</h2>
 
+                <?php
+
+                if (isset($_GET['deluser'])){
+                    $deluser= $_GET['deluser'];
+                    $delquey = "delete from tbl_user where id='$deluser' ";
+                    $deldata = $db->delete($delquey);
+                    if( $deldata )
+                         {
+                            echo "<span class='success'>User Deleted Successfully </span>";
+                         }
+                         else
+                         {
+                            echo "<span class='error'>User Not Deleted  ! </span>";
+                         }
+                }
+                ?>
 
                 <div class="block">
                     <table class="data display datatable" id="example">
