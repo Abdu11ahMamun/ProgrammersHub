@@ -20,7 +20,18 @@
                         $query = "select * from tbl_category order by id desc";
                         $category = $db->select($query);
                         if ($category)
-                         ?>
+                        {
+                            $i=0 ;
+                            while ($result= $category->fetch_assoc())
+                            {
+                             $i++; 
+                           ?>
+						<tr class="odd gradeX" >
+							<td><?php echo $i; ?></td>
+							<td><?php echo $result['name']; ?></td>
+							<td><a href="editcat.php?catid=<?php echo $result['id']; ?>">Edit</a>||<a onclick="return confirm ('Do you really want to delete!'); "href="?delcat=<?php echo $result['id'];?>">Delete</a></td>
+						</tr>
+                        <?php }} ?>
                        
 					</tbody>
 				</table>
