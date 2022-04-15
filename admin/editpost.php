@@ -1,9 +1,87 @@
 <?php include 'inc/header.php'; ?> 
 <?php include 'inc/sidebar.php'; ?> 
-
+<?php
+if (!isset($_GET['editpostid'])|| $_GET['editpostid'] == NULL) {
+    echo "<script>window.location = 'catlist.php';</script>"; 
+}else {
+    $postid = $_GET['editpostid'];
+}?>
 <div class="grid_10"> <div class="box round first grid">
 <h2>Update Post</h2>
+<?php
+ if ($_SERVER['REQUEST_METHOD']=='POST'){
+      $title=mysqli_real_escape_string($db->link,$_POST['title']);
+      $cat=mysqli_real_escape_string($db->link,$_POST['cat']);
+      $body=mysqli_real_escape_string($db->link,$_POST['body']);
+      $tags=mysqli_real_escape_string($db->link,$_POST['tags']);
+      $author=mysqli_real_escape_string($db->link,$_POST['author']);
+      $userid=mysqli_real_escape_string($db->link,$_POST['userid']);
 
+
+
+      //Image validation part
+      $permited  = array('jpg', 'jpeg', 'png', 'gif');
+      $file_name = $_FILES['image']['name'];
+      $file_size = $_FILES['image']['size'];
+      $file_temp = $_FILES['image']['tmp_name'];
+  
+      $div = explode('.', $file_name);
+      $file_ext = strtolower(end($div));
+      $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
+      $uploaded_image = "upload/".$unique_image;
+
+      if ($title=="" || $cat=="" || $body=="" || $tags=="" || $author=="") 
+      {
+           echo "<span class='error >Field must not be empty ! </span>";
+      } else{
+          
+        if(!empty($file_name)){
+            if ($file_size >1048567) {
+            echo "<span class='error'>Image Size should be less then 1MB! </span>";
+      } elseif (in_array($file_ext, $permited) === false) 
+      {
+           echo "<span class='error'>You can upload only:-"
+           .implode(', ', $permited)."</span>";
+      } else{
+          move_uploaded_file($file_temp, $uploaded_image);
+          $query= "Update tbl_post
+          SET 
+          cat ='$cat',
+          title ='$title',
+          body ='$body',
+          image ='$uploaded_image',
+          author ='$author',
+          tags ='$tags',
+          userid='$userid'
+          where id= '$postid'";
+          $updated_row = $db->update($query);
+          if ($updated_row) {
+           echo "<span class='success'>Post Updated Successfully. </span>";
+          }else{
+           echo "<span class='success'>Post Not Updated. </span>";
+          }
+      }
+    }else{
+        $query= "Update tbl_post
+          SET 
+          cat ='$cat',
+          title ='$title',
+          body ='$body',
+          author ='$author',
+          tags ='$tags',
+          userid='$userid'
+          where id= '$postid'";
+          $updated_row = $db->update($query);
+          if ($updated_row) {
+           echo "<span class='success'>Post Updated Successfully. </span>";
+          }else{
+           echo "<span class='success'>Post Not Updated. </span>";
+          }
+
+    }
+}
+}
+?>
         <div class="block"> 
                      
         <form action="" method="post" enctype="multipart/form-data">
