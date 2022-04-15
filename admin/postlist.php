@@ -18,9 +18,10 @@
 <th widht="15%">Action</th>
 </tr>
 </thead>
+<tbody>
 
-<?php 
-	// Delete post
+<?php
+	//Delete post
 	if (isset($_GET['delpostid'])){
 		$delid= $_GET['delpostid'];
 		$delquey = "delete from tbl_post where id='$delid' ";
@@ -35,7 +36,6 @@
 				}
 	}
 ?>
-<tbody>
 <?php 
 $query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post
 			INNER JOIN tbl_category
@@ -58,12 +58,15 @@ $query = "SELECT tbl_post.*, tbl_category.name FROM tbl_post
 	<td><?php echo $fm->formatDate($result['date']); ?></td>
 
 <td><a href="viewpost.php?viewpostid=<?php echo $result['id']; ?>">View</a> 
+<?php if(Session::get('userId')==$result['userid'] || Session::get('userRole')=='1')
+{?>
 ||<td><a href="editpost.php?editpostid=<?php echo $result['id']; ?>">Edit</a> 
 || <a onclick="return confirm('Are you sure to Delete this post?')" href="?delpostid=<?php echo $result['id']; ?>">Delete</a>
-
-
+<?php }?>
 </td> 
 </tr>
+
+<?php } } ?>
 
 </tbody>
 </table>
