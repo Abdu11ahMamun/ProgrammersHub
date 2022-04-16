@@ -1,5 +1,4 @@
 <?php include'inc/header.php';?>
-<?php include'inc/sidebar.php'; ?>
 
 <?php
      if(!isset($_GET['category'])|| $_GET['category']==NULL){
@@ -34,4 +33,6 @@
 		
 		?>
 </div>
+<?php include'inc/sidebar.php'; ?>
+
 <?php include'inc/footer.php'; ?>

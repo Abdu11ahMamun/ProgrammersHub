@@ -9,7 +9,7 @@
 		<div class="maincontent clear">
 		<!--Pagination-->
 		<?php
-			$per_page = 3;
+			$per_page = 1;
 			if(isset($_GET["page"])){
 				$page = $_GET["page"];
 			}else{
