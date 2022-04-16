@@ -1,4 +1,4 @@
-<?php include 'inc/header.php'; ?> 
+﻿<?php include 'inc/header.php'; ?> 
 <?php include 'inc/sidebar.php'; ?>
 <div class="grid_10"> 
 <div class="box round first grid">
@@ -21,7 +21,7 @@
 <tbody>
 
 <?php
-	//Delete post
+	//Category Delete
 	if (isset($_GET['delpostid'])){
 		$delid= $_GET['delpostid'];
 		$delquey = "delete from tbl_post where id='$delid' ";
