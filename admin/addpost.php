@@ -26,7 +26,7 @@
 
                         if ($title=="" || $cat=="" || $body=="" || $tags=="" || $author=="" || $file_name=="") 
                         {
-                             echo "<span class='error >Field must not be empty ! </span>";
+                             echo "<span class='error'>Field must not be empty ! </span>";//3
                         } elseif ($file_size >1048567) {
                              echo "<span class='error'>Image Size should be less then 1MB!
                              </span>";
@@ -48,7 +48,7 @@
                    }
                 ?>
                 <div class="block">               
-                 <form action="" method="post" enctype="multipart/form-data">
+                  <form action="addpost.php" method="post" enctype="multipart/form-data"> <!--1-->
                     <table class="form">
                        
                         <tr>
@@ -75,7 +75,7 @@
 
                                     ?>
                                     <option value="<?php echo $result['id']; ?>"><?php echo $result['name']; ?></option>
-                                    <? }} ?>
+                                     <?php }} ?><!--2 -->
                                 </select>
                             </td>
                         </tr>
@@ -110,7 +110,7 @@
                                 <label>Author</label>
                             </td>
                             <td>
-                                <input type="text" name="author" placeholder="Enter Author name..." class="medium" />
+                                <input type="text" name="author" value="<?php echo Session::get('username')?>" class="medium" />
                             </td>
                         </tr>
 
