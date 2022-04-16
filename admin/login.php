@@ -5,10 +5,10 @@ Session::init(); //access in the session
 <?php include '../config/config.php';?>
 <?php include '../lib/Database.php';?>
 <?php include '../helpers/Format.php';?>
-<?php
+<?php 
      $db=new Database();
 	 $fm=new Format();
-?>
+?>	 
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
@@ -18,7 +18,7 @@ Session::init(); //access in the session
 <body>
 <div class="container">
 	<section id="content">
-    <?php
+		<?php
 		   if($_SERVER['REQUEST_METHOD'] =='POST'){
 			$username=$fm->validation($_POST['username']);
 			$password=$fm->validation(md5($_POST['password']));
@@ -26,7 +26,7 @@ Session::init(); //access in the session
 			$username=mysqli_real_escape_string($db->link,$username);
 			$password=mysqli_real_escape_string($db->link,$password);
 
-      $query="SELECT * FROM tbl_user WHERE username='$username' AND password='$password'";
+			$query="SELECT * FROM tbl_user WHERE username='$username' AND password='$password'";
 			$result=$db->select($query);
 			if($result!=false){
 				$value=mysqli_fetch_array($result);
@@ -35,6 +35,8 @@ Session::init(); //access in the session
 					Session::set("login",true);
 					Session::set("username",$value['username']);
 					Session::set("userId",$value['id']);
+					Session::set("userRole",$value['role']);
+
 					header("Location:index.php");
 
 				}else{
@@ -43,8 +45,8 @@ Session::init(); //access in the session
 			}else{
 				echo "<span style='color:red;font-size:15px;'> Name or password not matched.</span>";
 			}
-
-	  }
+			
+		   }
 		?>
 		<form action="login.php" method="post">
 			<h1>Admin Login</h1>
